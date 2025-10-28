@@ -1,0 +1,88 @@
+
+# Starter world config — extend freely.
+# For each bank you can define multiple extractors; the first successful one wins.
+banks:
+  - bank: HSBC UK
+    country: GB
+    product: personal
+    currency: GBP
+    term: "varies"
+    source_url: "https://www.hsbc.co.uk/loans/personal-loans/"
+    extractors:
+      - type: html_css
+        selector: "div:contains('APR')"
+        value_pattern: "(\d+\.?\d*)\s*%\s*APR"
+        take: min
+        percent_format: plain
+  - bank: Barclays UK
+    country: GB
+    product: personal
+    currency: GBP
+    term: "varies"
+    source_url: "https://www.barclays.co.uk/loans/personal-loans/"
+    extractors:
+      - type: html_css
+        selector: "body"
+        value_pattern: "(\d+\.?\d*)\s*%\s*APR"
+        take: min
+        percent_format: plain
+  - bank: Bank of America
+    country: US
+    product: auto
+    currency: USD
+    term: "varies"
+    source_url: "https://www.bankofamerica.com/auto-loans/"
+    extractors:
+      - type: html_css
+        selector: "body"
+        value_pattern: "(\d+\.?\d*)\s*%\s*(?:APR|APR\*)"
+        take: min
+        percent_format: plain
+  - bank: Wells Fargo
+    country: US
+    product: personal
+    currency: USD
+    term: "varies"
+    source_url: "https://www.wellsfargo.com/personal-loans/"
+    extractors:
+      - type: html_css
+        selector: "body"
+        value_pattern: "(\d+\.?\d*)\s*%\s*APR"
+        take: min
+        percent_format: plain
+  - bank: Deutsche Bank
+    country: DE
+    product: personal
+    currency: EUR
+    term: "varies"
+    source_url: "https://www.deutsche-bank.de/pk/kredit/privatkredit.html"
+    extractors:
+      - type: html_css
+        selector: "body"
+        value_pattern: "(\d+\.?\d*)\s*%\s*(?:eff\.?\s*)?p\.?a\.?"
+        take: min
+        percent_format: plain
+  - bank: Swedbank Latvia
+    country: LV
+    product: mortgage
+    currency: EUR
+    term: "varies"
+    source_url: "https://www.swedbank.lv/private/loans/home/mortgage"
+    extractors:
+      - type: html_css
+        selector: "body"
+        value_pattern: "(\d+\.?\d*)\s*%"
+        take: min
+        percent_format: plain
+  - bank: SEB Latvia
+    country: LV
+    product: mortgage
+    currency: EUR
+    term: "varies"
+    source_url: "https://www.seb.lv/en/private/loans/mortgage-loan"
+    extractors:
+      - type: html_css
+        selector: "body"
+        value_pattern: "(\d+\.?\d*)\s*%"
+        take: min
+        percent_format: plain
